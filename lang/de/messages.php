@@ -16,5 +16,16 @@ return [
     'email_password_reset_link' => 'DE: Email Password Reset Link', 
     'confirm_password' => 'DE: Confirm Password', 
     'reset_password' => 'DE: Reset Password', 
-    'profile' => 'DE: Profile',    
+    'profile' => 'DE: Profile', 
+
+    'users' => 'DE: Users',
+    'user_profile' => 'DE: User profile',
+    'edit_user' => 'DE: Edit user',
+    'user_updated' => 'DE: User profile updated',
+    'name' => 'DE: Name',
+    'view' => 'DE: View',
+    'edit' => 'DE: Edit',
+    'save' => 'DE: Save',		
+	'system' => 'DE: System', 
+	'system_settings' => 'DE: System settings', 
 ];

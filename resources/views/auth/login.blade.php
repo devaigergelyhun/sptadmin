@@ -47,8 +47,18 @@
     </form>
 
     <div class="block mt-4">        
-        <a href="{{ route('lang.switch', 'hu') }}">HU</a> |
-        <a href="{{ route('lang.switch', 'en') }}">EN</a> |
-        <a href="{{ route('lang.switch', 'de') }}">DE</a>
+        <a href="{{ route('lang.switch', 'hu') }}"
+            class="{{ app()->getLocale() === 'hu' ? 'font-bold underline' : '' }}">
+            HU
+        </a>
+        <a href="{{ route('lang.switch', 'en') }}"
+           class="{{ app()->getLocale() === 'en' ? 'font-bold underline' : '' }}">
+            EN
+        </a>
+        <a href="{{ route('lang.switch', 'de') }}"
+           class="{{ app()->getLocale() === 'de' ? 'font-bold underline' : '' }}">
+            DE
+        </a>
+        
     </div>        
 </x-guest-layout>

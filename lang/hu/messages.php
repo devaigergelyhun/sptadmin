@@ -17,5 +17,17 @@ return [
     'email_password_reset_link' => 'Jelsző vissza állító link elküldése', 
     'confirm_password' => 'Jelszó megerősítésa', 
     'reset_password' => 'Jelszó felülírása', 
-    'profile' => 'Profil',    
+    'profile' => 'Profil',
+	
+    'users' => 'Felhasználók',
+    'user_profile' => 'Felhasználói adatlap',
+    'edit_user' => 'Felhasználó szerkesztése',
+    'user_updated' => 'Felhasználó adatai frissítve',
+    'name' => 'Név',
+    'view' => 'Megnyitás',
+    'edit' => 'Szerkesztés',
+    'save' => 'Mentés',	
+	'system' => 'Rendszer', 
+	'system_settings' => 'Rendszer beállítások', 
+	
 ];

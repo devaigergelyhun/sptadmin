@@ -17,4 +17,16 @@ return [
     'confirm_password' => 'Confirm Password', 
     'reset_password' => 'Reset Password', 
     'profile' => 'Profile',
+	
+    'users' => 'Users',
+    'user_profile' => 'User profile',
+    'edit_user' => 'Edit user',
+    'user_updated' => 'User profile updated',
+    'name' => 'Name',
+    'view' => 'View',
+    'edit' => 'Edit',
+    'save' => 'Save',	
+	'system' => 'System', 	
+	'system_settings' => 'System settings', 	
+	
 ];

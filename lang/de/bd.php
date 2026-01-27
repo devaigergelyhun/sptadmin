@@ -1,0 +1,26 @@
+<?php
+
+return array (
+  'basic_datas' => 'DE: Törzsadatok',
+  'Hdprimarycategory' => 'DE: Hdprimarycategory',
+  'Hdprimarycategories' => 'DE: Hdprimarycategories',
+  'hdsecondarycategories' => 'Hdsecondarycategories',
+  'hdsecondarycategory' => 'Hdsecondarycategory',
+  'secondarycatname' => 'Secondarycatname',
+  'therapies' => 'DE: Therapies',
+  'new_therapy' => 'DE: new...',
+  'name_of_theraphy' => 'DE: Name of the therapy',
+  'therapy' => 'DE: therapy',
+  'pressure' => 'DE: Pressure',
+  'temp' => 'DE: Temp.',
+  'temprature' => 'DE: temprature',
+  'time_ranges' => 'DE: Time ranges',
+  'short' => 'DE: Short',
+  'middle' => 'DE: Middle',
+  'long' => 'DE: Long',
+  'low' => 'DE: Low',
+  'medium' => 'DE: Medium',
+  'high' => 'DE: High',
+  'therapycategories' => 'DE: Therapy categories',
+  'therapycategory' => 'DE: therapycategory',
+);

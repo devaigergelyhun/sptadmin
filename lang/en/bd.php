@@ -1,0 +1,26 @@
+<?php
+
+return array (
+  'basic_datas' => 'Basic datas',
+  'Hdprimarycategory' => 'HD Primary Category',
+  'Hdprimarycategories' => 'HD Primary Categories',
+  'hdsecondarycategories' => 'HD Secondary "Hybrid" Categories',
+  'hdsecondarycategory' => 'HD Secondary "Hybrid" Category',
+  'secondarycatname' => 'Secondary cat.name',
+  'therapies' => 'Therapies',
+  'new_therapy' => 'New therapy',
+  'name_of_theraphy' => 'Name of the therapy',
+  'therapy' => 'Therapy',
+  'pressure' => 'Pressure',
+  'temp' => 'Temp.',
+  'temprature' => 'Temprature',
+  'time_ranges' => 'Time ranges',
+  'short' => 'Short',
+  'middle' => 'Middle',
+  'long' => 'Long',
+  'low' => 'Low',
+  'medium' => 'Medium',
+  'high' => 'High',
+  'therapycategories' => 'Therapy categories',
+  'therapycategory' => 'Therapy category',
+);

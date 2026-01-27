@@ -1,0 +1,26 @@
+<?php
+
+return array (
+  'basic_datas' => 'Törzsadatok',
+  'Hdprimarycategory' => 'HD elsődleges kategória',
+  'Hdprimarycategories' => 'HD elsődleges kategóriák',
+  'hdsecondarycategories' => 'HD másodlagos hibrid kategóriák',
+  'hdsecondarycategory' => 'HD másodlagos hibrid kategória',
+  'secondarycatname' => 'Másodlagos kategória',
+  'therapies' => 'Terápiák',
+  'new_therapy' => 'Új terápia',
+  'name_of_theraphy' => 'Terápia neve',
+  'therapy' => 'Terápia',
+  'pressure' => 'Nyomás',
+  'temp' => 'Hőmérs.',
+  'temprature' => 'Hőmérséglet',
+  'time_ranges' => 'Intervallumok',
+  'short' => 'Rövid',
+  'middle' => 'Közepes',
+  'long' => 'Hosszú',
+  'low' => 'Alacsony',
+  'medium' => 'Közepes',
+  'high' => 'Magas',
+  'therapycategories' => 'Terápia kategóriák',
+  'therapycategory' => 'Terápia kategória',
+);

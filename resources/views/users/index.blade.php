@@ -1,12 +1,16 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl">
-            {{ __('messages.users') }}
+        <h2 class="text-l">
+            {{ __('messages.system_settings') }} / {{ __('messages.users') }} 
+            <a href="{{ route('users.create') }}" 
+               class="px-2 py-1 rounded text-l font-medium bg-gray-100 text-gray-600 hover:text-indigo-600 hover:bg-gray-50">
+                + {{ __('messages.new_user') }}
+            </a>
         </h2>
     </x-slot>
 
     <div class="p-6">
-        <table class="min-w-full border">
+        <table class="min-w-full border bg-white p-6 rounded shadow">
             <thead>
                 <tr class="bg-gray-100">
                     <th class="p-2">#</th>
@@ -23,7 +27,9 @@
                         <td class="p-2">{{ $user->email }}</td>
                         <td class="p-2 text-right">
                             <a href="{{ route('users.show', $user) }}"
-                               class="text-indigo-600">
+                               class_x="text-indigo-600"
+                               class="px-2 py-1 rounded text-l font-medium bg-gray-100 text-gray-600 hover:text-indigo-600 hover:bg-gray-50"
+                               >
                                 {{ __('messages.view') }}
                             </a>
                         </td>

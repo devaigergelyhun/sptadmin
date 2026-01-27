@@ -23,6 +23,7 @@ return Application::configure(basePath: dirname(__DIR__))
             AddLinkHeadersForPreloadedAssets::class,
             SetLocale::class,
         ]);
+
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //

@@ -1,36 +1,58 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\UserController;
-use Illuminate\Support\Facades\Route;
+    use App\Http\Controllers\ProfileController;
+    use App\Http\Controllers\UserController;
+    use App\Http\Controllers\HdprimarycategoryController;
+    use App\Http\Controllers\HdsecondarycategoryController;
+    use App\Http\Controllers\AppcaptionController;
+    use App\Http\Controllers\TherapyController;
+    use App\Http\Controllers\TherapycategoryController;
 
-Route::get('/', function () {
-    return redirect()->route('dashboard');
-});
+    use Illuminate\Support\Facades\Route;
 
-Route::middleware(['auth'])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
-});
+    /* language */
+    Route::get('/locale/{locale}', function ($locale) {
+        if (in_array($locale, ['hu', 'en', 'de'])) {
+            session(['locale' => $locale]);
+            app()->setLocale($locale);
+        }
+        return redirect()->back();
+    })->name('lang.switch');
 
-Route::middleware(['auth'])->group(function () {
-    Route::resource('users', UserController::class)
-        ->only(['index', 'show', 'edit', 'update']);
-});
+    Route::get('/', function () {
+        return redirect()->route('dashboard');
+    });
 
-Route::get('/lang/{locale}', function ($locale) {
-    if (in_array($locale, ['en', 'hu', 'de'])) {
-        session(['locale' => $locale]);
-    }
+    Route::get('/langtest', function () {
+        return 'LANG OK';
+    });
 
-    return back();
-})->name('lang.switch');
+    Route::middleware(['auth'])->group(function () {
+        Route::get('/dashboard', function () {
+            return view('dashboard');
+        })->name('dashboard');
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
+        Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
+        Route::post('/users', [UserController::class, 'store'])->name('users.store');
+        Route::resource('users', UserController::class)->only(['index', 'show', 'edit', 'update']);
+        Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+        Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
 
-require __DIR__.'/auth.php';
+        Route::resource('therapies', TherapyController::class);
+
+        Route::resource('therapycategories', TherapycategoryController::class);
+
+        Route::resource('hdprimarycategories', HdprimarycategoryController::class);
+
+        Route::resource('hdsecondarycategories', HdsecondarycategoryController::class);
+
+        Route::get('/appcaptions/exportlangfiles', [App\Http\Controllers\AppcaptionController::class, 'exportTranslationsToLangFiles'])
+            ->name('appcaptions.exportlangfiles')
+            ->middleware('auth');
+        Route::get('/appcaptions/searchtranslations', [App\Http\Controllers\AppcaptionController::class, 'searchtranslations'])
+            ->name('appcaptions.searchtranslations');
+
+        Route::resource('appcaptions', AppcaptionController::class);
+    });
+
+    require __DIR__.'/auth.php';

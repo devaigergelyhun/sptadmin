@@ -2,6 +2,7 @@
     <x-slot name="header">
         <h2 class="text-l">
             {{ __('bd.basic_datas') }} / {{ __('bd.Hdprimarycategories') }} 
+            |
             <a href="{{ route('hdprimarycategories.create') }}" class="px-2 py-1 rounded text-l font-medium bg-gray-100 text-gray-600 hover:text-indigo-600 hover:bg-gray-50">
                 + {{ __('messages.new') }}
             </a>

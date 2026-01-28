@@ -2,6 +2,7 @@
     <x-slot name="header">
         <h2 class="text-l">
             {{ __('messages.system_settings') }} / {{ __('messages.users') }} 
+            |
             <a href="{{ route('users.create') }}" 
                class="px-2 py-1 rounded text-l font-medium bg-gray-100 text-gray-600 hover:text-indigo-600 hover:bg-gray-50">
                 + {{ __('messages.new_user') }}

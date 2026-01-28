@@ -59,8 +59,11 @@
                             </button>
                         </x-slot>
                         <x-slot name="content">
-                            <x-dropdown-link :href="route('users.index')">
+                            <x-dropdown-link :href="route('partners.index')">
                                 {{ __('messages.partners') }}
+                            </x-dropdown-link>
+                            <x-dropdown-link :href="route('partnerusers.index')">
+                                {{ __('messages.partnerusers') }}
                             </x-dropdown-link>
                         </x-slot>
                     </x-dropdown>                

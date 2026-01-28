@@ -7,6 +7,8 @@
     use App\Http\Controllers\AppcaptionController;
     use App\Http\Controllers\TherapyController;
     use App\Http\Controllers\TherapycategoryController;
+    use App\Http\Controllers\PartnerController;
+    use App\Http\Controllers\PartneruserController;
 
     use Illuminate\Support\Facades\Route;
 
@@ -53,6 +55,11 @@
             ->name('appcaptions.searchtranslations');
 
         Route::resource('appcaptions', AppcaptionController::class);
+        
+        Route::resource('partners', PartnerController::class);
+        
+        Route::resource('partnerusers', PartneruserController::class);
+        
     });
 
     require __DIR__.'/auth.php';

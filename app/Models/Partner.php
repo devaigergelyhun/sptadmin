@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Partneruser;
+use App\Models\Partnertherapy;
 
 class Partner extends Model
 {
@@ -16,8 +17,13 @@ class Partner extends Model
         'active', 
     ];
     
-    public function partnerUsers()
+    public function partnerusers()
     {
-        return $this->hasMany(PartnerUser::class, 'partnerid');
+        return $this->hasMany(Partneruser::class, 'partnerid');
+    }    
+    
+    public function partnertherapies()
+    {
+        return $this->hasMany(Partnertherapy::class, 'partner_id');
     }    
 }

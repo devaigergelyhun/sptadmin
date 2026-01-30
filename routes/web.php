@@ -25,10 +25,6 @@
         return redirect()->route('dashboard');
     });
 
-    Route::get('/langtest', function () {
-        return 'LANG OK';
-    });
-
     Route::middleware(['auth'])->group(function () {
         Route::get('/dashboard', function () {
             return view('dashboard');
@@ -59,6 +55,14 @@
         Route::resource('partners', PartnerController::class);
         
         Route::resource('partnerusers', PartneruserController::class);
+        
+        Route::prefix('partners/{partner}')->group(function () {
+            Route::get('partnerusers/create', [PartnerUserController::class, 'create'])
+                ->name('partners.users.create');
+
+        Route::post('partnerusers', [PartnerUserController::class, 'store'])
+            ->name('partners.users.store');
+});
         
     });
 

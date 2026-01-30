@@ -20,6 +20,7 @@ class PartneruserController extends Controller
         
         $data['isactive'] = $request->boolean('isactive');
         $data['isadmin'] = $request->boolean('isadmin');
+        $data['issystemadmin'] = $request->boolean('isadmin');
         
         return $data;
     }
@@ -38,23 +39,30 @@ class PartneruserController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Partner $partner)
     {
+        
         $partners = Partner::where('active', 1)
             ->orderBy('partnername')
             ->pluck('partnername', 'id');
         
-        return view('partnerusers.create', compact('partners'));
+        return view('partnerusers.create', compact('partner', 'partners'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, Partner $partner)
     {
-        Partneruser::create($this->validateRec($request));
-        return redirect()->route('partnerusers.index')
-            ->with('success', __('messages.partneruser_created'));        
+        $data = $this->validateRec($request);
+        
+        $data['partnerid'] = $partner->id;
+        
+        Partneruser::create($data);
+        
+        return redirect()
+            ->route('partners.edit', $partner)
+            ->with('success', 'Felhasználó létrehozva.');    
     }
 
     /**
@@ -73,6 +81,8 @@ class PartneruserController extends Controller
         $partners = Partner::where('active', 1)
             ->orderBy('partnername')
             ->pluck('partnername', 'id');
+        
+        $partneruser->load(['partner']);
         
         return view('partnerusers.edit', compact('partneruser', 'partners'));
     }

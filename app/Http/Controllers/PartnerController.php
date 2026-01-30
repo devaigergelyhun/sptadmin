@@ -48,6 +48,7 @@ class PartnerController extends Controller
      */
     public function edit(Partner $partner)
     {
+        $partner->load(['partnerusers', 'partnertherapies']);
         return view('partners.edit', compact('partner'));
     }
 
@@ -56,7 +57,7 @@ class PartnerController extends Controller
      */
     public function update(Request $request, Partner $partner)
     {
-        $partner->update($this->validateRecord($request));
+        $partner->update($this->validateRec($request));
         
         return redirect()->route('partners.index')
             ->with('success', __('messages.partner_updated'));

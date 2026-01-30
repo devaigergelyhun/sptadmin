@@ -20,7 +20,7 @@ class VerificationNotificationTest extends TestCase
 
         $this->actingAs($user)
             ->post(route('verification.send'))
-            ->assertRedirect(route('home'));
+            ->assertRedirect(route('login'));
 
         Notification::assertSentTo($user, VerifyEmail::class);
     }

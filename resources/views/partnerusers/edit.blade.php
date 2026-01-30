@@ -1,3 +1,4 @@
+
 <x-app-layout>
     <x-slot name="header">
         <h2 class="text-l">
@@ -5,7 +6,11 @@
             <a href="{{ route('partnerusers.index') }}" class="px-2 py-1 rounded text-l font-medium bg-gray-100 text-gray-600 hover:text-indigo-600 hover:bg-gray-50">
                 {{ __('messages.partnerusers') }} 
             </a>
-            / {{ __('messages.edit') }}
+            / {{ __('messages.edit') }}: {{ $partneruser->name }} / {{ __('messages.partner') }}: 
+            <a href="{{ route('partners.edit', $partneruser->partner) }}" class="px-2 py-1 rounded text-l font-medium bg-gray-100 text-gray-600 hover:text-indigo-600 hover:bg-gray-50">
+                {{ $partneruser->partner->partnername }}
+            </a>
+            
         </h2>
     </x-slot>
     
@@ -46,6 +51,14 @@
                     <label class="flex items-center gap-4">
                         <input type="checkbox" name="isadmin" :value="1" {{ ($partneruser->isadmin) ? 'checked' : '' }}>
                         {{__('messages.admin')}}?
+                    </label>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label class="flex items-center gap-4">
+                        <input type="checkbox" name="issystemadmin" :value="1" {{ ($partneruser->issystemadmin) ? 'checked' : '' }}>
+                        {{__('messages.systemadmin')}}?
                     </label>
                 </div>
             </div>

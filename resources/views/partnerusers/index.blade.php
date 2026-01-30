@@ -2,10 +2,6 @@
     <x-slot name="header">
         <h2 class="text-l">
             {{ __('messages.crm') }} / {{ __('messages.partnerusers') }} 
-            |
-            <a href="{{ route('partnerusers.create') }}" class="px-2 py-1 rounded text-l font-medium bg-gray-100 text-gray-600 hover:text-indigo-600 hover:bg-gray-50">
-                + {{ __('messages.new') }}
-            </a>
         </h2>
     </x-slot>    
 
@@ -17,6 +13,7 @@
                     <th class="p-2">{{ __('messages.partnername') }}</th>
                     <th class="p-2">{{ __('messages.name') }}</th>
                     <th class="p-2">{{ __('messages.admin') }}</th>
+                    <th class="p-2">{{ __('messages.systemadmin') }}</th>
                     <th class="p-2">{{ __('messages.loginname') }}</th>
                     <th class="p-2">{{ __('messages.email') }}</th>
                     <th class="p-2">{{ __('messages.active') }}</th>
@@ -30,6 +27,7 @@
                         <td class="p-2">{{ $r->partner->partnername }}</td>
                         <td class="p-2">{{ $r->name }}</td>
                         <td class="p-2">{{ ($r->isadmin == 1 ? strtolower(__('messages.admin')) : '')}}</td>
+                        <td class="p-2">{{ ($r->issystemadmin == 1 ? strtolower(__('messages.systemadmin')) : '')}}</td>
                         <td class="p-2">{{ $r->loginname }}</td>
                         <td class="p-2">{{ $r->email }}</td>
                         <td class="p-2">{{ ($r->isactive == 1 ? strtolower(__('messages.active')) : strtolower(__('messages.inactive')))}}</td>

@@ -1,0 +1,9 @@
++ autocomplete off ???
++ válasz üzenetek megjelenítése
+- nyelv kezelés, nested blokkok kezelése
+- válasz üzenetek csinosítása...
+- registzráció kiiktatása
+
+- partnerek és terápiák összekapcsolása
+    + tábla: partnertherapies
+- terápiák publikus flag-je

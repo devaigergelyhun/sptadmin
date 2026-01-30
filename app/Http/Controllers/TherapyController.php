@@ -10,6 +10,9 @@ use App\Models\Therapycategory;
 
 class TherapyController extends Controller
 {
+    
+    
+    
     public function index(Request $request)
     {
         $query = Therapy::query();

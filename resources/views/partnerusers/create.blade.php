@@ -1,20 +1,18 @@
-
 <x-app-layout>
     <x-slot name="header">
         <h2 class="text-l">
             {{ __('messages.crm') }} 
-            / 
-            <a href="{{ route('partnerusers.index') }}" class="px-2 py-1 rounded text-l font-medium bg-gray-100 text-gray-600 hover:text-indigo-600 hover:bg-gray-50">
-                {{ __('messages.partnerusers') }} 
-            </a>
-            /
-            {{ __('messages.new') }}
+            / {{ __('messages.partner') }}: 
+            <a href="{{ route('partners.edit', $partner) }}" class="px-2 py-1 rounded text-l font-medium bg-gray-100 text-gray-600 hover:text-indigo-600 hover:bg-gray-50">                
+                {{ $partner->partnername }}
+            </a>    
+             / {{ __('messages.new') }} {{ strtolower(__('messages.create_user')) }}
         </h2>
     </x-slot>
 
     <div class="py-6 max-w-7xl mx-auto" class_old="py-6 max-w-4xl mx-auto">
 
-        <form method="POST" action="{{ route('partnerusers.store') }}" class="bg-white p-6 rounded shadow space-y-4">
+        <form method="POST" action="{{ route('partners.users.store', $partner) }}" class="bg-white p-6 rounded shadow space-y-4">
             @csrf
             
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -26,7 +24,7 @@
                             class="w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
                         <option value="">...{{__('messages.choose_one')}}</option>
                         @foreach($partners as $id => $partnername)
-                            <option value="{{ $id }}" @selected(old('partnerid') == $id)>
+                            <option value="{{ $id }}" @selected( ($partner->id == $id) )>
                                 {{ $partnername }}
                             </option>
                         @endforeach
@@ -45,11 +43,21 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                     <label class="flex items-center gap-4">
-                        <input type="checkbox" name="isadmin" value="1" {{ old('isadmin') ? 'checked' : '' }}>
+                        <input type="checkbox" name="isadmin" value="0" {{ old('isadmin') ? 'checked' : '' }}>
                         {{__('messages.admin')}}?
                     </label>
                 </div>
             </div>
+            
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label class="flex items-center gap-4">
+                        <input type="checkbox" name="issystemadmin" value="0" {{ old('issystemadmin') ? 'checked' : '' }}>
+                        {{__('messages.systemadmin')}}?
+                    </label>
+                </div>
+            </div>
+            
             
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>

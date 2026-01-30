@@ -71,4 +71,8 @@ return array (
   'partneruser_created' => 'DE: Partner\'s user created',
   'admin' => 'Admin',
   'loginname' => 'DE: Loginname',
+  'partneruser_updated' => 'DE: Partner\'s user updated',
+  'therapy_add' => 'DE: Add therapy',
+  'systemadmin' => 'DE: System admin',
+  'partner' => 'Partner',
 );

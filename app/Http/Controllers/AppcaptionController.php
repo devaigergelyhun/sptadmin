@@ -103,7 +103,7 @@ class AppcaptionController extends Controller
      */
     public function destroy(Appcaption $appcaption)
     {
-        $appcaption->delete();
+        //$appcaption->delete();
         return redirect()->route('appcaptions.index');
     }
     
@@ -150,18 +150,33 @@ class AppcaptionController extends Controller
     
     private function loopTranlastionFiles($translations, $filename, $lang) {
         foreach ($translations as $key => $value) {
-
-            Appcaption::updateOrCreate(
-                [
-                    'langfile' => $filename,
-                    'placeholder' => $key,
-                ],
-                [
-                    $lang => $value,
-                    'foundinfile' => 1,
-                    'foundincode' => 0,
-                ]
-            );
+            if (is_array($value)) {
+                foreach ($value as $subKey => $subvalue) {
+                    Appcaption::updateOrCreate(
+                        [
+                            'langfile' => $filename,
+                            'placeholder' => $key.".".$subKey,
+                        ],
+                        [
+                            $lang => $subvalue,
+                            'foundinfile' => 1,
+                            'foundincode' => 0,
+                        ]
+                    );
+                }
+            } else {
+                Appcaption::updateOrCreate(
+                    [
+                        'langfile' => $filename,
+                        'placeholder' => $key,
+                    ],
+                    [
+                        $lang => $value,
+                        'foundinfile' => 1,
+                        'foundincode' => 0,
+                    ]
+                );
+            }
         }
     }
     
@@ -204,39 +219,72 @@ class AppcaptionController extends Controller
                 );
 
                 $keys = array_filter(array_merge($matches[1], $matches[2], $matches[3]));
-
-                foreach ($keys as $fullKey) {
-
-                    if (!str_contains($fullKey, '.')) {
-                        continue;
-                    }
-
-                    //bele van írva az angol szöveg. 
-                    //ha van benne szóköz 
-                    
-                    [$langfile, $placeholder] = explode('.', $fullKey, 2);
-
-                    $caption = Appcaption::where('langfile', $langfile)
-                        ->where('placeholder', $placeholder)
-                        ->first();
-
-                    if ($caption) {
-                        $caption->update(['foundincode' => 1]);
-                    } else {
-                        Appcaption::create([
-                            'langfile' => $langfile,
-                            'placeholder' => $placeholder,
-                            'foundincode' => 1,
-                            'foundinfile' => 0,
-                            'en' => '', 
-                            'hu' => '', 
-                            'de' => '', 
-                        ]);
-                    }
-                }
+                $this->parseStrings($keys);
+                
             }
         }        
     }
+    
+    protected function persistNewCaption(string $fullKey) {
+        $caption = Appcaption::where('en', $fullKey)
+            ->first();        
+        if ($caption) {
+            $caption->update(['foundincode' => 1]);            
+        } else {
+            Appcaption::create([
+                'langfile' => '',
+                'placeholder' => '',
+                'foundincode' => 1,
+                'foundinfile' => 0,
+                'en' => $fullKey, 
+                'hu' => $fullKey, 
+                'de' => $fullKey, 
+            ]);            
+        }
+        
+    }
+    
+    protected function persistByPlaceholder(string $fullKey) {
+        
+        $words = explode('.', $fullKey);
+        $langfile = $words[0];
+        $placeholder = '';
+        if (count($words) > 1) {
+            $placeholder .= $words[1];
+            for ($i = 2; $i < count($words); $i++) {
+                $placeholder .= '.'.$words[$i];
+            }            
+        }
+                
+        $caption = Appcaption::where('langfile', $langfile)
+            ->where('placeholder', $placeholder)
+            ->first();
+
+        if ($caption) {
+            $caption->update(['foundincode' => 1]);
+        } else {
+            Appcaption::create([
+                'langfile' => $langfile,
+                'placeholder' => $placeholder,
+                'foundincode' => 1,
+                'foundinfile' => 0,
+                'en' => '', 
+                'hu' => '', 
+                'de' => '', 
+            ]);
+        }         
+    }    
+    
+    protected function parseStrings($keys) {
+        foreach ($keys as $fullKey) {
+
+            if (str_contains($fullKey, '.') && !str_contains($fullKey, ' ')) {
+                $this->persistByPlaceholder($fullKey);
+            } else {
+                $this->persistNewCaption($fullKey);
+            }
+        }        
+    }    
     
     public function searchtranslations()
     {
@@ -263,7 +311,12 @@ class AppcaptionController extends Controller
         foreach ($captions as $row) {
             foreach ($languages as $lang) {
                 if ($row->$lang !== null && $row->$lang !== '') {
-                    $data[$lang][$row->langfile][$row->placeholder] = $row->$lang;
+                    if (str_contains($row->placeholder, '.')) {
+                        $placeholders = explode('.', $row->placeholder);
+                        $data[$lang][$row->langfile][$placeholders[0]][$placeholders[1]] = $row->$lang;
+                    } else {
+                        $data[$lang][$row->langfile][$row->placeholder] = $row->$lang;
+                    }
                 }
             }
         }
